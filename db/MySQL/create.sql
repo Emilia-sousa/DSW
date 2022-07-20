@@ -4,18 +4,51 @@ create database Turismo;
 
 use Turismo;
 
-create table Clientes(id bigint not null auto_increment, cpf varchar(11) not null, nome varchar(256) not null, primary key (id));
+create table Cliente(cpf varchar(14) not null, nome varchar(256) not null, email varchar(256) not null, telefone varchar(14), sexo char, senha varchar(8) not null, dataNascimento date not null, CONSTRAINT cliente_pk primary key (cpf), CONSTRAINT sexo_check CHECK (sexo IN ('M', 'F', 'X')));
 
-create table Lojas(id bigint not null auto_increment, cnpj varchar(18) not null, autor varchar(256) not null, ano integer not null, preco float not null, editora_id bigint not null, primary key (id), foreign key (editora_id) references Editora(id));
+create table Agencia(cnpj varchar(18) not null, nome varchar(256) not null, email varchar(256) not null, descricao varchar(500), CONSTRAINT agencia_pk PRIMARY KEY(cnpj));
 
-insert into Editora(cnpj, nome) values  ('55.789.390/0008-99', 'Companhia das Letras');
 
-insert into Editora(cnpj, nome) values ('71.150.470/0001-40', 'Record');
+create table PacoteTuristico(Pacoteid bigint NOT NULL auto_increment, cnpjResponsavel varchar(18) NOT NULL, duracao bigint NOT NULL, valor float NOT NULL, descricao varchar(500), CONSTRAINT duracao_valido CHECK (duracao >= 0), CONSTRAINT valor_valido CHECK (valor >=0), CONSTRAINT id_pk PRIMARY KEY(Pacoteid), FOREIGN KEY (cnpjResponsavel) REFERENCES Agencia(cnpj) ON UPDATE CASCADE);
 
-insert into Editora(cnpj, nome) values ('32.106.536/0001-82', 'Objetiva');
+create table Destino(Destinoid bigint NOT NULL auto_increment, cidade varchar(30) NOT NULL, estado varchar(30) NOT NULL, pais varchar(30) NOT NULL, CONSTRAINT destino_pk PRIMARY KEY(Destinoid)
+);
 
-insert into Livro(titulo, autor, ano, preco, editora_id) values ('Ensaio sobre a Cegueira', 'José Saramago', 1995, 54.9, 1);
+create table PacoteDestino(pacote_id bigint NOT NULL, destino_id bigint NOT NULL, FOREIGN KEY (pacote_id) REFERENCES PacoteTuristico(Pacoteid) ON UPDATE CASCADE, FOREIGN KEY (destino_id) REFERENCES Destino(Destinoid) ON UPDATE CASCADE, CONSTRAINT pacote_destino_pk PRIMARY KEY (pacote_id, destino_id)
+);
 
-insert into Livro(titulo, autor, ano, preco, editora_id) values  ('Cem anos de Solidão', 'Gabriel Garcia Márquez', 1977, 59.9, 2);
 
-insert into Livro(titulo, autor, ano, preco, editora_id) values ('Diálogos Impossíveis', 'Luis Fernando Verissimo', 2012, 22.9, 3);
+
+/*
+Exemplo de inserção de Cliente
+
+*/
+/*
+INSERT INTO Cliente(cpf, nome, email, telefone, sexo, senha, dataNascimento)
+VALUES ('123.456.789-10', 'Fulano', 'fulano@gmail.com', '(16)98765-4321', 'M', '12345678', '01/01/0001');
+*/
+/*
+----------------------------------------
+Exemplo de inserção de Agencia
+*/
+/*
+INSERT INTO Agencia(cnpj, nome, email, descricao)
+VALUES ('00.000.000/0001-00', 'Loja', 'exemplo@loja.com', 'Esta é uma descrição de exemplo');
+*/
+/*
+---------------------------------------
+Exemplo de inserção de PacoteTuristico, perceba que há 3 tabelas para esse requisito:
+uma para o pacote, outra para o destino e uma terceira que representa o relacionamento N:M das duas primeiras
+obs: condições de busca mais específicas devem ser usadas quando há vários pacotes com o mesmo cnpjResponsável
+*/
+/*
+INSERT INTO PacoteTuristico(cnpjResponsavel, duracao, valor, descricao)
+VALUES ('00.000.000/0001-00', 15, 999.99, 'Esta é uma descrição de exemplo');
+
+INSERT INTO Destino(cidade, estado, pais)
+VALUES ('Orlando', 'Florida', 'Estados Unidos');
+
+INSERT INTO PacoteDestino(pacote_id, destino_id)
+SELECT Pacoteid, Destinoid FROM PacoteTuristico, Destino
+WHERE cnpjResponsavel='00.000.000/0001-00' OR cidade='Orlando';
+*/
