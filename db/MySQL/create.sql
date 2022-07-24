@@ -47,7 +47,7 @@ create table PacoteTuristico(
 );
 
 create table Foto(
-	Caminho varchar(100) NOT null,
+	caminho varchar(100) NOT null,
 	pacote_id bigint NOT NULL,
 	FOREIGN KEY (pacote_id) REFERENCES PacoteTuristico(Pacoteid)
 );
