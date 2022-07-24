@@ -1,37 +1,37 @@
 package br.ufscar.dc.dsw.domain;
 
-import java.util.Date; 
+import java.sql.Timestamp;
 
-public class Cliente {
-
-    private Long id;
+public class Cliente extends Usuario {
     private String cpf;
     private String telefone;
-    private char sexo;
-    private Date dataNascimento;
+    private String sexo;
+    private Timestamp dataNascimento;
 
-    public Cliente(Long id) {
-        this.id = id;
+    public Cliente(Long id){
+        super(id);
     }
 
-    public Cliente(Long id, String cpf, String telefone, char sexo, Date dataNascimento) {
-        this.id = id;
-        this.cpf = cpf;
-        this.telefone = telefone;
-        this.sexo = sexo;
-        this.dataNascimento = dataNascimento;
+    public Cliente(Long id, String nome, String email, String senha, String tipo, String cpf, String telefone, String sexo, Timestamp dataNascimento) {
+        super(id, nome, email, senha, tipo);
+
+        this.setCpf(cpf);
+        this.setTelefone(telefone);
+        this.setSexo(sexo);
+        this.setDataNascimento(dataNascimento);
     }
 
-    public Long getId() {
-        return id;
-    }
+    public Cliente(String nome, String email, String senha, String tipo, String cpf, String telefone, String sexo, Timestamp dataNascimento) {
+        super(nome, email, senha, tipo);
 
-    public void setId(Long id) {
-        this.id = id;
+        this.setCpf(cpf);
+        this.setTelefone(telefone);
+        this.setSexo(sexo);
+        this.setDataNascimento(dataNascimento);
     }
 
     public String getCpf() {
-        return this.cpf;
+        return cpf;
     }
 
     public void setCpf(String cpf) {
@@ -39,26 +39,26 @@ public class Cliente {
     }
 
     public String getTelefone() {
-    	return this.telefone;
+        return telefone;
     }
-    
+
     public void setTelefone(String telefone) {
-    	this.telefone = telefone;
+        this.telefone = telefone;
     }
-    
-    public char getSexo() {
-    	return this.sexo;
+
+    public String getSexo() {
+        return sexo;
     }
-    
-    public void setSexo(char sexo) {
-    	this.sexo = sexo;
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
     }
-    
-    public Date getDataNasc() {
-    	return this.dataNascimento;
+
+    public Timestamp getDataNascimento() {
+        return dataNascimento;
     }
-    
-    public void setDataNasc(Date dataNasc) {
-    	this.dataNascimento = dataNasc;
+
+    public void setDataNascimento(Timestamp dataNascimento) {
+        this.dataNascimento = dataNascimento;
     }
 }
