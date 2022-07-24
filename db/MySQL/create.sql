@@ -63,8 +63,9 @@ create table PacoteDestino(
 );
 
 create table PacotesAdquiridos(
-	pacote_id bigint not null,
-	usuario_id bigint not null,
+	pacote_id bigint NOT NULL,
+	usuario_id bigint NOT NULL,
+	status ENUM('Comprado', 'Realizado', 'Cancelado') NOT NULL,
 	FOREIGN KEY (pacote_id) REFERENCES PacoteTuristico(Pacoteid) ON UPDATE CASCADE,
 	FOREIGN KEY (usuario_id) REFERENCES Usuario(id) ON UPDATE CASCADE
 );
