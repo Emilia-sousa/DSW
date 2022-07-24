@@ -4,20 +4,71 @@ create database Turismo;
 
 use Turismo;
 
-create table Cliente(cpf varchar(14) not null, nome varchar(256) not null, email varchar(256) not null, telefone varchar(14), sexo char, senha varchar(8) not null, dataNascimento date not null, CONSTRAINT cliente_pk primary key (cpf), CONSTRAINT sexo_check CHECK (sexo IN ('M', 'F', 'X')));
-
-create table Agencia(cnpj varchar(18) not null, nome varchar(256) not null, email varchar(256) not null, descricao varchar(500), CONSTRAINT agencia_pk PRIMARY KEY(cnpj));
-
-
-create table PacoteTuristico(Pacoteid bigint NOT NULL auto_increment, cnpjResponsavel varchar(18) NOT NULL, duracao bigint NOT NULL, valor float NOT NULL, descricao varchar(500), CONSTRAINT duracao_valido CHECK (duracao >= 0), CONSTRAINT valor_valido CHECK (valor >=0), CONSTRAINT id_pk PRIMARY KEY(Pacoteid), FOREIGN KEY (cnpjResponsavel) REFERENCES Agencia(cnpj) ON UPDATE CASCADE);
-
-create table Destino(Destinoid bigint NOT NULL auto_increment, cidade varchar(30) NOT NULL, estado varchar(30) NOT NULL, pais varchar(30) NOT NULL, CONSTRAINT destino_pk PRIMARY KEY(Destinoid)
+create table Usuario(
+	id bigint not NULL auto_increment, 
+	tipo ENUM('Admin', 'Cliente', 'Agencia') NOT NULL,
+	email varchar(256) not null,
+	senha varchar(8) not null,
+	nome varchar(256) not null, 
+	CONSTRAINT usuario_pk PRIMARY KEY (id)
 );
 
-create table PacoteDestino(pacote_id bigint NOT NULL, destino_id bigint NOT NULL, FOREIGN KEY (pacote_id) REFERENCES PacoteTuristico(Pacoteid) ON UPDATE CASCADE, FOREIGN KEY (destino_id) REFERENCES Destino(Destinoid) ON UPDATE CASCADE, CONSTRAINT pacote_destino_pk PRIMARY KEY (pacote_id, destino_id)
+create table Cliente(
+	cpf varchar(14) not null,
+	telefone varchar(14), 
+	sexo char,
+	dataNascimento date not null, 
+	id bigint not null,
+	CONSTRAINT cliente_pk primary key (cpf), 
+	CONSTRAINT sexo_check CHECK (sexo IN ('M', 'F', 'X')), 
+	FOREIGN KEY (id) REFERENCES Usuario(id)
+);
+
+create table Agencia(
+	cnpj varchar(18) not null, 
+	descricao varchar(500), 
+	id bigint not null,
+	CONSTRAINT agencia_pk PRIMARY KEY(cnpj),
+	FOREIGN KEY (id) REFERENCES Usuario(id)
 );
 
 
+create table PacoteTuristico(
+	Pacoteid bigint NOT NULL auto_increment, 
+	cnpjResponsavel varchar(18) NOT NULL, 
+	duracao bigint NOT NULL,
+	dataPartida date not null,
+	valor float NOT NULL, 
+	descricao varchar(500), 
+	CONSTRAINT duracao_valido CHECK (duracao >= 0), 
+	CONSTRAINT valor_valido CHECK (valor >=0), 
+	CONSTRAINT id_pk PRIMARY KEY(Pacoteid), 
+	FOREIGN KEY (cnpjResponsavel) REFERENCES Agencia(cnpj) ON UPDATE CASCADE
+);
+
+create table Destino(
+	Destinoid bigint NOT NULL auto_increment, 
+	cidade varchar(30) NOT NULL, 
+	estado varchar(30) NOT NULL, 
+	pais varchar(30) NOT NULL, 
+	CONSTRAINT destino_pk PRIMARY KEY(Destinoid)
+);
+
+create table PacoteDestino(
+	pacote_id bigint NOT NULL, 
+	destino_id bigint NOT NULL, 
+	FOREIGN KEY (pacote_id) REFERENCES PacoteTuristico(Pacoteid) ON UPDATE CASCADE, 
+	FOREIGN KEY (destino_id) REFERENCES Destino(Destinoid) ON UPDATE CASCADE, 
+	CONSTRAINT pacote_destino_pk PRIMARY KEY (pacote_id, destino_id)
+);
+
+create table PacotesAdquiridos(
+	pacote_id bigint not null,
+	usuario_id bigint not null,
+	FOREIGN KEY (pacote_id) REFERENCES PacoteTuristico(Pacoteid) ON UPDATE CASCADE,
+	FOREIGN KEY (usuario_id) REFERENCES Usuario(id) ON UPDATE CASCADE
+);
+	
 
 /*
 Exemplo de inserção de Cliente
