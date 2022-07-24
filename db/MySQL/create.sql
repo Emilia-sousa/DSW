@@ -38,12 +38,18 @@ create table PacoteTuristico(
 	cnpjResponsavel varchar(18) NOT NULL, 
 	duracao bigint NOT NULL,
 	dataPartida date not null,
-	valor float NOT NULL, 
+	valor float NOT NULL,
 	descricao varchar(500), 
 	CONSTRAINT duracao_valido CHECK (duracao >= 0), 
 	CONSTRAINT valor_valido CHECK (valor >=0), 
 	CONSTRAINT id_pk PRIMARY KEY(Pacoteid), 
 	FOREIGN KEY (cnpjResponsavel) REFERENCES Agencia(cnpj) ON UPDATE CASCADE
+);
+
+create table Foto(
+	Caminho varchar(100) NOT null,
+	pacote_id bigint NOT NULL,
+	FOREIGN KEY (pacote_id) REFERENCES PacoteTuristico(Pacoteid)
 );
 
 create table Destino(
