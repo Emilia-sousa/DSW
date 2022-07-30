@@ -1,0 +1,80 @@
+body {
+    background-image: url("../assets/TESTEFUNDO.png");
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.cadastro-container {
+    position: relative;
+
+    padding-top: 111px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo {
+    margin-bottom: 127px;
+}
+
+.cadastro-container h1 {
+    margin-bottom: 11px;
+
+    font-size: 50px;
+    font-weight: 500;
+
+    color: var(--black); /* cor da escrita cadastre-se */
+}
+
+.opcoes-usuario {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 67px;
+}
+
+.opcao {
+    padding: 0 20px;
+
+    width: 517px;
+    height: 211px;
+
+    background: var(--white);/* cor da caixa */ 
+
+    border-radius: 25px;
+
+    box-shadow: var(--shadow);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.opcao a {
+    width: 305px;
+    height: 127px;
+
+    font-size: 40px;
+    font-weight: 500;
+    text-align: center;
+
+    color: var(--white); /*cor da escrita da caixa*/
+
+    background: var(--degrade);
+
+    border: 0;
+    border-radius: 15px;
+
+    box-shadow: var(--shadow);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: all 0.2s;
+}
+
+.opcao a:hover {
+    opacity: 0.8;
+}
