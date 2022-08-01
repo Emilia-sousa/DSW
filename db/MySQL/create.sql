@@ -16,40 +16,31 @@ create table Usuario(
 create table Cliente(
 	cpf varchar(14) not null,
 	telefone varchar(14), 
-	sexo char,
+	sexo varchar(14),
 	dataNascimento date not null, 
 	id bigint not null,
-	CONSTRAINT cliente_pk primary key (cpf), 
-	CONSTRAINT sexo_check CHECK (sexo IN ('M', 'F', 'X')), 
-	FOREIGN KEY (id) REFERENCES Usuario(id)
+	CONSTRAINT cliente_pk primary key (cpf) 
 );
 
 create table Agencia(
-	cnpj varchar(18) not null, 
+	cnpj varchar(18) not null unique, 
 	descricao varchar(500), 
-	id bigint not null,
-	CONSTRAINT agencia_pk PRIMARY KEY(cnpj),
-	FOREIGN KEY (id) REFERENCES Usuario(id)
+	id int not null,
+	PRIMARY KEY (id)
 );
-
 
 create table PacoteTuristico(
-	Pacoteid bigint NOT NULL auto_increment, 
-	cnpjResponsavel varchar(18) NOT NULL, 
-	duracao bigint NOT NULL,
-	dataPartida date not null,
-	valor float NOT NULL,
-	descricao varchar(500), 
-	CONSTRAINT duracao_valido CHECK (duracao >= 0), 
-	CONSTRAINT valor_valido CHECK (valor >=0), 
-	CONSTRAINT id_pk PRIMARY KEY(Pacoteid), 
-	FOREIGN KEY (cnpjResponsavel) REFERENCES Agencia(cnpj) ON UPDATE CASCADE
-);
-
-create table Foto(
-	caminho varchar(100) NOT null,
-	pacote_id bigint NOT NULL,
-	FOREIGN KEY (pacote_id) REFERENCES PacoteTuristico(Pacoteid)
+	id INT NOT NULL AUTO_INCREMENT,
+	cnpj_agencia varchar(255) NOT NULL,
+	destino_cidade varchar(255) NOT NULL,
+	destino_estado varchar(255) NOT NULL,
+	destino_pais varchar(255) NOT NULL,
+	data_partida TIMESTAMP NOT NULL,
+	duracao_dias INT NOT NULL,
+	valor FLOAT NOT NULL,
+	descricao varchar(255) NOT NULL,
+	qtd_foto varchar(255) NOT NULL,
+	PRIMARY KEY (id)
 );
 
 create table Destino(
@@ -60,26 +51,22 @@ create table Destino(
 	CONSTRAINT destino_pk PRIMARY KEY(Destinoid)
 );
 
-create table PacoteDestino(
-	pacote_id bigint NOT NULL, 
-	destino_id bigint NOT NULL, 
-	FOREIGN KEY (pacote_id) REFERENCES PacoteTuristico(Pacoteid) ON UPDATE CASCADE, 
-	FOREIGN KEY (destino_id) REFERENCES Destino(Destinoid) ON UPDATE CASCADE, 
-	CONSTRAINT pacote_destino_pk PRIMARY KEY (pacote_id, destino_id)
+CREATE TABLE Foto (
+	id_pacote INT NOT NULL,
+	url varchar(255) NOT NULL
 );
 
-create table PacotesAdquiridos(
-	pacote_id bigint NOT NULL,
-	usuario_id bigint NOT NULL,
-	status ENUM('Comprado', 'Realizado', 'Cancelado') NOT NULL,
-	FOREIGN KEY (pacote_id) REFERENCES PacoteTuristico(Pacoteid) ON UPDATE CASCADE,
-	FOREIGN KEY (usuario_id) REFERENCES Usuario(id) ON UPDATE CASCADE
+CREATE TABLE Compra (
+	id INT NOT NULL AUTO_INCREMENT,
+	id_cliente INT NOT NULL,
+	id_pacote INT NOT NULL,
+	PRIMARY KEY (id)
 );
-	
+
+INSERt INTO Usuario(nome, email, senha, tipo) values ('administrador', 'admin@admin.com', 'admin', 'admin');
 
 /*
 Exemplo de inserção de Cliente
-
 */
 /*
 INSERT INTO Cliente(cpf, nome, email, telefone, sexo, senha, dataNascimento)
@@ -102,10 +89,8 @@ obs: condições de busca mais específicas devem ser usadas quando há vários 
 /*
 INSERT INTO PacoteTuristico(cnpjResponsavel, duracao, valor, descricao)
 VALUES ('00.000.000/0001-00', 15, 999.99, 'Esta é uma descrição de exemplo');
-
 INSERT INTO Destino(cidade, estado, pais)
 VALUES ('Orlando', 'Florida', 'Estados Unidos');
-
 INSERT INTO PacoteDestino(pacote_id, destino_id)
 SELECT Pacoteid, Destinoid FROM PacoteTuristico, Destino
 WHERE cnpjResponsavel='00.000.000/0001-00' OR cidade='Orlando';

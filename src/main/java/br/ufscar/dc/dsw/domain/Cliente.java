@@ -30,6 +30,14 @@ public class Cliente extends Usuario {
         this.setDataNascimento(dataNascimento);
     }
 
+    public Cliente(Long id, String cpf, String telefone, String sexo, Timestamp dataNascimento) {
+        super(id);
+        this.setCpf(cpf);
+        this.setTelefone(telefone);
+        this.setSexo(sexo);
+        this.setDataNascimento(dataNascimento);
+    } 
+
     public String getCpf() {
         return cpf;
     }

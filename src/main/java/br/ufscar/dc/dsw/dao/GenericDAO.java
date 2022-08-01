@@ -16,6 +16,6 @@ abstract public class GenericDAO{
     protected Connection getConnection() throws SQLException{
         String url = "jdbc:mysql://localhost:3306/Turismo";
 
-        return DriverManager.getConnection(url, "root", "4Vmp9tyg@");
+        return DriverManager.getConnection(url, "jdbc", "123456");
     }
 }
