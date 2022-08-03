@@ -16,7 +16,7 @@ import br.ufscar.dc.dsw.domain.Agencia;
 import br.ufscar.dc.dsw.dao.ClienteDAO;
 import br.ufscar.dc.dsw.dao.PacoteTuristicoDAO;
 import br.ufscar.dc.dsw.dao.AgenciaDAO;
-import br.ufscar.dc.dsw.dao.UsuarioDAO;
+
 
 //import br.ufscar.dc.dsw.util.Erro;
 
@@ -26,14 +26,14 @@ public class PerfilController extends HttpServlet {
 	private ClienteDAO cDAO;
 	private AgenciaDAO aDAO;
 	private PacoteTuristicoDAO pDAO;
-    private UsuarioDAO uDAO;
+    
 
 	@Override
     public void init() {
 		cDAO = new ClienteDAO();
 		aDAO = new AgenciaDAO();
         pDAO = new PacoteTuristicoDAO();
-        uDAO = new UsuarioDAO();
+        
     }
 
     @Override

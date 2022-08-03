@@ -94,7 +94,7 @@ public class AdminController extends HttpServlet {
 
     private void removeUsuario(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        Erro erros = new Erro();
+        
         Long id = Long.parseLong(request.getParameter("id"));
         
         /*
@@ -166,9 +166,17 @@ public class AdminController extends HttpServlet {
             } catch (java.text.ParseException e) {
                 erros.add(e.toString());
                 request.setAttribute("mensagens", erros);
-                RequestDispatcher rd = request.getRequestDispatcher("/noAuth.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("/erro.jsp");
                 rd.forward(request, response);
             }
+        }
+        if (!senha.contentEquals(confirmarSenha)) {
+        	
+        	erros.add("senhas não conferem");
+            request.setAttribute("mensagens", erros);
+            RequestDispatcher rd = request.getRequestDispatcher("/erro.jsp");
+            rd.forward(request, response);
+        	
         }
 
            
@@ -191,13 +199,9 @@ public class AdminController extends HttpServlet {
     }
 
     private void updateAgencia(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        /*
+        
         Erro erros = new Erro();
-        erros.add("teste");
-        request.setAttribute("mensagens", erros);
-        RequestDispatcher rd = request.getRequestDispatcher("/noAuth.jsp");
-        rd.forward(request, response);
-        */
+        
         
         Long id = Long.parseLong(request.getParameter("id")); 
         String nome = request.getParameter("nome");
@@ -206,6 +210,14 @@ public class AdminController extends HttpServlet {
         String descricao = request.getParameter("descricao");
         String senha = request.getParameter("senha");
         String confirmarSenha = request.getParameter("confirmar-senha");
+        if (!senha.contentEquals(confirmarSenha)) {
+        	
+        	erros.add("senhas não conferem");
+            request.setAttribute("mensagens", erros);
+            RequestDispatcher rd = request.getRequestDispatcher("/erro.jsp");
+            rd.forward(request, response);
+        	
+        }
         
 
             /*

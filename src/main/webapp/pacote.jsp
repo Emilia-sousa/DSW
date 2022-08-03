@@ -11,6 +11,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home | James Vacation</title>
+    <link rel="stylesheet" href="styles/global.css" />
     <script type="text/javascript">
         var usuario = "<%= session.getAttribute("usuarioLogado")%>";
         if (usuario === "null") {
@@ -25,9 +26,9 @@
             <div class="pacote-container">
             
                 <div class="lista-fotos" var="fotos" items="${pacote.fotos}">
-                <c:forEach  var="fotos" items="${pacote.fotos}">
-                        <div class="foto" style="background-image: url('${fotos.url}');"></div>
-                </c:forEach>
+                
+                        <div class="foto" style="background-image: url('${fotos[0].url}');"></div>
+                
                 </div>       
 
                 <div class="informacoes-pacote">

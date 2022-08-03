@@ -25,7 +25,7 @@ import br.ufscar.dc.dsw.domain.Foto;
 import br.ufscar.dc.dsw.domain.PacoteTuristico;
 import br.ufscar.dc.dsw.util.Erro;
 import br.ufscar.dc.dsw.util.Util;
-import br.ufscar.dc.dsw.util.Validator;
+
 
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
@@ -53,7 +53,7 @@ public class CadastroPacoteController extends HttpServlet {
             Float valor = Float.parseFloat(valorParameter == null || valorParameter.isEmpty() ? "0" : valorParameter);
             Part descricao = request.getPart("descricao");
             List<Part> fileParts = request.getParts().stream().filter(part -> "fotos".equals(part.getName()) && part.getSize() > 0).collect(Collectors.toList());
-                // é pra dar erro no vscode ta funcionando perfeitamente
+             
 
             String descricaoPath = null;
 

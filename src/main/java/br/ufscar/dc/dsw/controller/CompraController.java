@@ -1,10 +1,7 @@
 package br.ufscar.dc.dsw.controller;
 
 import java.io.IOException;
-import java.util.Date;
-import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.ufscar.dc.dsw.domain.Usuario;
-import br.ufscar.dc.dsw.util.Util;
 import br.ufscar.dc.dsw.domain.Cliente;
 import br.ufscar.dc.dsw.domain.Compra;
 import br.ufscar.dc.dsw.domain.PacoteTuristico;

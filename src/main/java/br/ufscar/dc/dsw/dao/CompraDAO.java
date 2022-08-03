@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 import br.ufscar.dc.dsw.domain.Cliente;
 import br.ufscar.dc.dsw.domain.Compra;
-import br.ufscar.dc.dsw.domain.PacoteTuristico;
+
 
 public class CompraDAO extends GenericDAO {
     public void insert(Compra compra){
