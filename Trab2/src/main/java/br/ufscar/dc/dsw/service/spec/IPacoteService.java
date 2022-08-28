@@ -7,11 +7,12 @@ import br.ufscar.dc.dsw.domain.PacoteTuristico;
 public interface IPacoteService {
 
 	PacoteTuristico buscarPorId(Long id);
-	
+
 	List<PacoteTuristico> buscarTodos();
 	
 	void salvar(PacoteTuristico pacote);
 	
 	void excluir(Long id);
-	
+
+	List<PacoteTuristico> getByKeyword(String keyword);
 }
