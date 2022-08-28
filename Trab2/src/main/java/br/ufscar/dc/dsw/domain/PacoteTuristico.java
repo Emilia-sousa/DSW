@@ -31,8 +31,7 @@ public class PacoteTuristico extends AbstractEntity<Long> {
 	private BigDecimal preco;
 
     
-    @Size(min = 1, max = 10)
-    @Column(nullable = true, length = 10)
+    @Column(nullable = true, length = 64)
     private String fotos;
 
     @NotNull(message = "{NotNull.pacote.agencia}")

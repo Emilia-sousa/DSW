@@ -1,6 +1,7 @@
 package br.ufscar.dc.dsw.controller;
 
 import java.util.List;
+import java.io.*;
 
 import javax.validation.Valid;
 
@@ -14,11 +15,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.util.StringUtils;
 
 import br.ufscar.dc.dsw.domain.Agencia;
 import br.ufscar.dc.dsw.domain.PacoteTuristico;
 import br.ufscar.dc.dsw.service.spec.IAgenciaService;
 import br.ufscar.dc.dsw.service.spec.IPacoteService;
+import br.ufscar.dc.dsw.util.FileUploadUtil;
+
 
 @Controller
 @RequestMapping("/pacotes")
@@ -50,15 +56,27 @@ public class PacoteController {
 	}
 
 	@PostMapping("/salvar")
-	public String salvar(@Valid PacoteTuristico pacote, BindingResult result, RedirectAttributes attr) {
+	public String salvar(@Valid PacoteTuristico pacote, @RequestParam("image") MultipartFile multipartFile, BindingResult result, RedirectAttributes attr) throws IOException {
 
+    
 		if (result.hasErrors()) {
 			return "pacote/cadastro";
 		}
 
+        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+        pacote.setFotos(fileName);
+
+        System.out.println(pacote.getPreco());
+
 		pacoteService.salvar(pacote);
+
+
+        String uploadDir = "src/main/resources/pacote-fotos/" + pacote.getId();
+ 
+        FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+
 		attr.addFlashAttribute("sucess", "pacote.create.sucess");
-		return "redirect:/pacotes/search";
+		return "redirect:/pacotes/listar";
 	}
 
 	@GetMapping("/editar/{id}")
