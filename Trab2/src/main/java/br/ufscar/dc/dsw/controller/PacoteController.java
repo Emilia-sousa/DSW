@@ -37,9 +37,15 @@ public class PacoteController {
 		return "pacote/cadastro";
 	}
 
-	@GetMapping("/listar")
-	public String listar(ModelMap model) {
-		model.addAttribute("pacotes", pacoteService.buscarTodos());
+
+	@RequestMapping(path = {"/search"})
+	public String listar(PacoteTuristico pacoteturistico, ModelMap model, String keyword) {
+		if(keyword!=null) {
+			List<PacoteTuristico> list = pacoteService.getByKeyword(keyword);
+			model.addAttribute("pacotes", list);
+		}else {
+			model.addAttribute("pacotes", pacoteService.buscarTodos());
+		}
 		return "pacote/lista";
 	}
 
@@ -52,7 +58,7 @@ public class PacoteController {
 
 		pacoteService.salvar(pacote);
 		attr.addFlashAttribute("sucess", "pacote.create.sucess");
-		return "redirect:/pacotes/listar";
+		return "redirect:/pacotes/search";
 	}
 
 	@GetMapping("/editar/{id}")
@@ -70,18 +76,19 @@ public class PacoteController {
 
 		pacoteService.salvar(pacote);
 		attr.addFlashAttribute("sucess", "pacote.edit.sucess");
-		return "redirect:/pacotes/listar";
+		return "redirect:/pacotes/search";
 	}
 
 	@GetMapping("/excluir/{id}")
 	public String excluir(@PathVariable("id") Long id, RedirectAttributes attr) {
 		pacoteService.excluir(id);
 		attr.addFlashAttribute("sucess", "pacote.delete.sucess");
-		return "redirect:/pacotes/listar";
+		return "redirect:/pacotes/search";
 	}
 
 	@ModelAttribute("agencias")
 	public List<Agencia> listaAgencias() {
 		return agenciaService.buscarTodos();
 	}
+	
 }
