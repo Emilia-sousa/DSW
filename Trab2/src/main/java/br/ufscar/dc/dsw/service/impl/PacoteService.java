@@ -1,5 +1,6 @@
 package br.ufscar.dc.dsw.service.impl;
 
+import java.beans.Transient;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,5 +34,9 @@ public class PacoteService implements IPacoteService {
 	@Transactional(readOnly = true)
 	public List<PacoteTuristico> buscarTodos() {
 		return dao.findAll();
+	}
+
+	public List<PacoteTuristico> getByKeyword(String keyword){
+		return dao.findByKeyword(keyword);
 	}
 }
