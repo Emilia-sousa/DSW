@@ -104,6 +104,13 @@ public class PacoteController {
 		return "redirect:/pacotes/search";
 	}
 
+	@PutMapping("/cancelar/{id}")
+	public String cancelar(@PathVariable("id") Long id, RedirectAttributes attr){
+		pacoteService.cancelar(id);
+		attr.addFlashAttribute("sucess", "pacote.cancel.sucess");
+		return "redirect:/pacotes/search";
+	}
+	
 	@ModelAttribute("agencias")
 	public List<Agencia> listaAgencias() {
 		return agenciaService.buscarTodos();
