@@ -14,5 +14,9 @@ public interface IPacoteService {
 	
 	void excluir(Long id);
 
+	void cancelar(Long id);
+
 	List<PacoteTuristico> getByKeyword(String keyword);
+
+	List<PacoteTuristico> buscarTodosAtivos();
 }
