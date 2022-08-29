@@ -79,3 +79,8 @@ public class PacoteTuristico extends AbstractEntity<Long> {
         return fotos;
     }
 }
+
+	public void setAtivo(Boolean ativo) { this.ativo = ativo ;}
+
+	public Boolean getAtivo(){ return ativo; }
+}
