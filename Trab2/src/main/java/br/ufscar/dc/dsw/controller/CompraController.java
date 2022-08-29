@@ -39,7 +39,7 @@ public class CompraController {
 		String data = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(Calendar.getInstance().getTime());
 		compra.setUsuario(this.getUsuario());
 		compra.setData(data);
-        model.addAttribute("pacotes", PacoteTuristicoService.buscarTodos());
+        model.addAttribute("pacotes", PacoteTuristicoService.buscarTodosAtivos());
 		return "compra/cadastro";
 	}
 	
