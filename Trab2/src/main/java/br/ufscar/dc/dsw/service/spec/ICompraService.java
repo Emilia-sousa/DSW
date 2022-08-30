@@ -12,4 +12,7 @@ public interface ICompraService {
 	List<Compra> buscarTodosPorUsuario(Usuario u);
 	
 	void salvar(Compra editora);
+
+    void excluir(Long id);
+
 }

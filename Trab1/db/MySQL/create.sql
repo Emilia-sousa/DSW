@@ -60,6 +60,11 @@ CREATE TABLE Compra (
 	id INT NOT NULL AUTO_INCREMENT,
 	id_cliente INT NOT NULL,
 	id_pacote INT NOT NULL,
+<<<<<<< HEAD:db/MySQL/create.sql
+	data_reuniao TIMESTAMP NOT NULL,
+	link_reuniao varchar(255) NOT NULL,
+=======
+>>>>>>> 1708f4ee20abcbce5c585ddd6f38ca3d5abad554:Trab1/db/MySQL/create.sql
 	PRIMARY KEY (id)
 );
 

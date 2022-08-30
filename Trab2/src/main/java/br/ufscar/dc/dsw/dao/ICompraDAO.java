@@ -15,4 +15,6 @@ public interface ICompraDAO extends CrudRepository<Compra, Long>{
 	List<Compra> findAllByUsuario(Usuario u);
 	
 	Compra save(Compra compra);
+
+    void deleteById(Long id);
 }

@@ -39,6 +39,7 @@ public class PacoteController {
 	@GetMapping("/cadastrar")
 	public String cadastrar(ModelMap model) {
         PacoteTuristico pacote = new PacoteTuristico();
+        pacote.setAtivo(true);
         model.addAttribute("pacote", pacote);
 		return "pacote/cadastro";
 	}
@@ -76,7 +77,7 @@ public class PacoteController {
         FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
 
 		attr.addFlashAttribute("sucess", "pacote.create.sucess");
-		return "redirect:/pacotes/listar";
+		return "redirect:/pacotes/search";
 	}
 
 	@GetMapping("/editar/{id}")
@@ -104,7 +105,7 @@ public class PacoteController {
 		return "redirect:/pacotes/search";
 	}
 
-	@PutMapping("/cancelar/{id}")
+	@GetMapping("/cancelar/{id}")
 	public String cancelar(@PathVariable("id") Long id, RedirectAttributes attr){
 		pacoteService.cancelar(id);
 		attr.addFlashAttribute("sucess", "pacote.cancel.sucess");

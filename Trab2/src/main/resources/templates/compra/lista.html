@@ -45,6 +45,14 @@
 							<td th:text="${compra.pacote.agencia.nome}"></td>
 							<td th:text="${compra.pacote.dataPartida}"></td>
 							<td th:text="|R$ ${#numbers.formatDecimal(compra.valor,2,2,'COMMA')}|"></td>
+
+                            <td colspan="1">
+                                <button th:id="${#strings.concat('btn_compras/excluir/',compra.id)}" 
+                                    type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal">
+                                    <span class="oi oi-circle-x" th:title="#{link.excluir.label}" aria-hidden="true"></span>
+                                </button>
+                            </td>
+
 						</tr>
 					</tbody>
 				</table>

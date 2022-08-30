@@ -22,6 +22,10 @@ public class CompraService implements ICompraService {
 		dao.save(compra);
 	}
 
+    public void excluir(Long id) {
+        dao.deleteById(id);
+    }
+
 	@Transactional(readOnly = true)
 	public Compra buscarPorId(Long id) {
 		return dao.findById(id.longValue());

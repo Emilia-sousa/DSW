@@ -87,23 +87,26 @@ public class JamesVacationApplication {
 			
 			PacoteTuristico l1 = new PacoteTuristico();
 			l1.setDestino("São paulo");
-			l1.setDataPartida("10-12-2021");
+			l1.setDataPartida("2021-12-10");
 			l1.setPreco(BigDecimal.valueOf(540.9));
+			l1.setAtivo(true);
 			l1.setAgencia(e1);
 			pacoteDAO.save(l1);
 			
 			PacoteTuristico l2 = new PacoteTuristico();
 			l2.setDestino("Campinas");
-			l2.setDataPartida("22-10-2022");
+			l2.setDataPartida("2022-10-22");
 			l2.setPreco(BigDecimal.valueOf(300.99));
 			l2.setAgencia(e2);
+			l2.setAtivo(true);
 			pacoteDAO.save(l2);
 			
 			PacoteTuristico l3 = new PacoteTuristico();
 			l3.setDestino("Santos");
-			l3.setDataPartida("15-05-2024");
+			l3.setDataPartida("2024-05-15");
 			l3.setPreco(BigDecimal.valueOf(999.99));
 			l3.setAgencia(e3);
+			l3.setAtivo(true);
 			pacoteDAO.save(l3);
 		};
 	}

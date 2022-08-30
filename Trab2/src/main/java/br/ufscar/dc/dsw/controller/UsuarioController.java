@@ -49,7 +49,7 @@ public class UsuarioController {
 		usuario.setPassword(encoder.encode(usuario.getPassword()));
 		service.salvar(usuario);
 		attr.addFlashAttribute("sucess", "usuario.create.sucess");
-		return "redirect:/pacotes/listar";
+		return "redirect:/";
 	}
 	
 	@GetMapping("/editar/{id}")

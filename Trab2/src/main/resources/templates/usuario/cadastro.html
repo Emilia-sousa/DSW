@@ -45,7 +45,7 @@
 						<input type="password" class="form-control" id="password"
 							th:placeholder="#{usuario.password.label}" autofocus="autofocus"
 							th:field="*{password}"
-							th:classappend="${#fields.hasErrors('password')} ? is-invalid" th:readonly="${usuario.id != null}"/>
+							th:classappend="${#fields.hasErrors('password')} ? is-invalid"/>
 							
 						<div class="invalid-feedback">
 							<span th:errors="*{password}"></span>

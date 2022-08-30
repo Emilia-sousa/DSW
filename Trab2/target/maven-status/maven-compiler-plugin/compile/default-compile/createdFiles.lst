@@ -9,6 +9,7 @@ br/ufscar/dc/dsw/service/impl/CompraService.class
 br/ufscar/dc/dsw/controller/PacoteController.class
 br/ufscar/dc/dsw/service/spec/IPacoteService.class
 br/ufscar/dc/dsw/security/UsuarioDetailsServiceImpl.class
+br/ufscar/dc/dsw/util/FileUploadUtil.class
 br/ufscar/dc/dsw/JamesVacationApplication.class
 br/ufscar/dc/dsw/domain/AbstractEntity.class
 br/ufscar/dc/dsw/dao/ICompraDAO.class

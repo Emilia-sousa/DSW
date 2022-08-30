@@ -23,7 +23,7 @@ public class PacoteTuristico extends AbstractEntity<Long> {
 	private String destino;
 
     
-	@Column(nullable = false, length = 15)
+	@Column(nullable = false, length = 19)
 	private String dataPartida;
 	
 	@NotNull(message = "{NotNull.livro.preco}")
@@ -38,6 +38,9 @@ public class PacoteTuristico extends AbstractEntity<Long> {
 	@ManyToOne
 	@JoinColumn(name = "agencia_id")
 	private Agencia agencia;
+
+    @Column(nullable = true)
+    private boolean ativo;
 
 	public String getDestino() {
 		return destino;
@@ -78,7 +81,7 @@ public class PacoteTuristico extends AbstractEntity<Long> {
     public String getFotos() {
         return fotos;
     }
-}
+
 
 	public void setAtivo(Boolean ativo) { this.ativo = ativo ;}
 

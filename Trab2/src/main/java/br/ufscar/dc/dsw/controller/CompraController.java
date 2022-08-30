@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.ufscar.dc.dsw.domain.Compra;
@@ -72,4 +73,11 @@ public class CompraController {
 	public List<PacoteTuristico> listaPacoteTuristicos() {
 		return PacoteTuristicoService.buscarTodos();
 	}
+    
+    @GetMapping("/excluir/{id}")
+    public String excluir(@PathVariable("id") Long id, RedirectAttributes attr) {
+        service.excluir(id);
+        attr.addFlashAttribute("sucess", "compra.delete.sucess");
+        return "redirect:/compras/listar";
+    }
 }
