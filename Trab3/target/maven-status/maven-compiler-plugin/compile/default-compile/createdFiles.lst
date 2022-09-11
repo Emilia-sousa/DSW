@@ -13,6 +13,7 @@ br/ufscar/dc/dsw/JamesVacationApplication.class
 br/ufscar/dc/dsw/domain/AbstractEntity.class
 br/ufscar/dc/dsw/dao/ICompraDAO.class
 br/ufscar/dc/dsw/controller/ErrorViewController.class
+br/ufscar/dc/dsw/controller/ClienteRestController.class
 br/ufscar/dc/dsw/controller/AgenciaController.class
 br/ufscar/dc/dsw/conversor/PacoteTuristicoConversor.class
 br/ufscar/dc/dsw/dao/IUsuarioDAO.class
@@ -24,6 +25,7 @@ br/ufscar/dc/dsw/service/impl/AgenciaService.class
 com/example/uploadingfiles/storage/StorageService.class
 br/ufscar/dc/dsw/dao/IAgenciaDAO.class
 br/ufscar/dc/dsw/controller/CompraController.class
+br/ufscar/dc/dsw/controller/AgenciaRestController.class
 br/ufscar/dc/dsw/domain/Usuario.class
 br/ufscar/dc/dsw/config/MvcConfig.class
 br/ufscar/dc/dsw/conversor/BigDecimalConversor.class
